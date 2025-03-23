@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe-AI</title>
+</head>
+<body>
+    <main>
+        <div class="content">
+            <div class="choose activate">
+                <div class="choose-title">What do you want?</div>
+                <div class="choose-btn">
+                <button class="chooser" onclick="choice(this)" style="background-color: #2dc5be;">X</button>
+                <button class="chooser" onclick="choice(this)" style="background-color: #f2b237;">O</button>
+                </div>
+            </div>
+            <div class="firstOne choose">
+                <div class="choose-title">Who will play first?</div>
+                <div class="choose-btn">
+                <button class="chooser" onclick="firstOne(this)" style="background-color: #2dc5be;">YOU</button>
+                <button class="chooser" onclick="firstOne(this)" style="background-color: #f2b237;">CPU</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="row">
+                    <div class="tile" style="border-top-left-radius: 25px;"></div>
+                    <div class="tile"></div>
+                    <div class="tile" style="border-top-right-radius: 25px;"></div>
+                </div>
+                <div class="row">
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                </div>
+                <div class="row">
+                    <div class="tile" style="border-bottom-left-radius: 25px;"></div>
+                    <div class="tile"></div>
+                    <div class="tile" style="border-bottom-right-radius: 25px;"></div>
+                </div>
+            </div>
+            <div class="won choose">
+                <div class="won-title choose-title"></div>
+                <div class="win-choose-btn">
+                <button class="reset" onclick="reset()" style="background-color: #f2b237;">RESET</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+</html>
