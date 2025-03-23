@@ -1,8 +1,8 @@
 // Initializing all the variable and constants 
 let user = 'O';
-let cpu = 'X';
+let AI = 'X';
 let currentPlayer = undefined;
-// Creating our scoresIndex, in order to keep the CPU as the maximizing player.
+// Creating our scoresIndex, in order to keep the AI as the maximizing player.
 let scoresIndex;
 // Initializing our game board which will be used by the optimizer to find an optimal move
 let board = [
@@ -16,7 +16,9 @@ const choose = document.querySelector(".choose");
 const card = document.querySelector(".card");
 const tiles = document.querySelectorAll(".tile");
 const won = document.querySelector(".won");
-// The "moves" variable will keep a track of how many moves that have been played. Though it is used only once just to make the CPU play Random at first turn.
+const celebration = document.getElementById("celebration");
+const winnerName = document.getElementById("winner-name");
+// The "moves" variable will keep a track of how many moves that have been played. Though it is used only once just to make the AI play Random at first turn.
 let moves = 0;
 
 
@@ -30,11 +32,11 @@ for (let i = 0; i < board.length; i++)
     }
 }
 
-// The below function keeps checking if it's CPU's turn or not. If yes, then it invokes the function for it's play.
+// The below function keeps checking if it's AI's turn or not. If yes, then it invokes the function for it's play.
 setInterval(()=>{
-    if (currentPlayer == cpu)
+    if (currentPlayer == AI)
     {
-        playCPU();
+        playAI();
     }
 }, 1);
 
@@ -47,9 +49,9 @@ setInterval(()=>{
 // This function is invoked when the user chooses who will be the first one to make the move.
 function firstOne(btn)
 {
-    if (btn.innerHTML == 'CPU')
+    if (btn.innerHTML == 'AI')
     {
-        currentPlayer = cpu;
+        currentPlayer = AI;
     }else{
         currentPlayer = user;
     }
@@ -59,15 +61,15 @@ function firstOne(btn)
 }
 
 // This function is invoked when user chooses which symbol he/she wants to take.
-// This function will reinitialize the symbol values of user and cpu, that were defined above at the beginning of the code.
+// This function will reinitialize the symbol values of user and AI, that were defined above at the beginning of the code.
 function choice(btn)
 {
     user = btn.innerHTML;
     // We assign the values accordingly using switch case.
     switch (user) {
         case 'X':
-            cpu = 'O';
-            // If the user chooses X, then cpu will have O and then O will have to be a maximizer, so the Score index is set accordingly.
+            AI = 'O';
+            // If the user chooses X, then AI will have O and then O will have to be a maximizer, so the Score index is set accordingly.
             scoresIndex = {
                 X: -10,
                 O: +10,
@@ -75,8 +77,8 @@ function choice(btn)
             }
             break;
         case 'O':
-            cpu = 'X';
-            // If the user chooses O, then cpu will have X and then X will have to be a maximizer, so the Score index is set accordingly.
+            AI = 'X';
+            // If the user chooses O, then AI will have X and then X will have to be a maximizer, so the Score index is set accordingly.
             scoresIndex = {
                 X: +10,
                 O: -10,
@@ -110,7 +112,7 @@ function triggerClick(tile)
         if (x == null)
         {
             // If no one has won and it's not a tie either then continue the game
-            currentPlayer = cpu;
+            currentPlayer = AI;
         }else{
             if (x == "TIE")
             {
@@ -129,11 +131,11 @@ function triggerClick(tile)
             }
         }
     }else{
-        // If it's CPU's turn
+        // If it's AI's turn
         // We Increment the value of "moves".
         moves++;
-        // We add a special class that differentiates user with the CPU as CPU's symbol colour will be Yellow.
-        tile.classList.add("cpu");
+        // We add a special class that differentiates user with the AI as AI's symbol colour will be Yellow.
+        tile.classList.add("AI");
         tile.innerHTML = currentPlayer;
         // We add a class "disabled" to our tile so that there are no further pointer events on that tile.
         tile.classList.add("disabled");
@@ -233,9 +235,9 @@ function displayWinner(winner)
     card.classList.remove("activate");
     const wonTitle = document.querySelector(".won-title");
     // Manipulating text according to who has won the game
-    if (winner == cpu)
+    if (winner == AI)
     {
-        wonTitle.innerHTML = "CPU wins!";
+        wonTitle.innerHTML = "AI wins!";
     }else{
         if (winner == 'TIE')
         {
@@ -246,9 +248,11 @@ function displayWinner(winner)
     }
     // Changing visuals
     won.classList.add("activate");
+    celebration.classList.add("activate");
+    winnerName.innerHTML = winner == 'TIE' ? "It's a Tie!" : `${winner} wins!`;
 }
 
-// The below function makes ever tile unclickable.
+// The below function makes every tile unclickable.
 function disableEveryTile()
 {
     for (let i = 0; i < board.length; i++)
@@ -263,8 +267,105 @@ function disableEveryTile()
     }
 }
 
-// The below function resets the page in case the user want a replay
+// The below function resets the page in case the user wants a replay
 function reset()
 {
     window.location.reload();
+}
+
+// ======================================================================
+// ======================================================================
+// ==============THIS IS THE BRAIN STRUCTURE OF AI=======================
+// ======================================================================
+// ======================================================================
+
+// THIS CODE IMPLEMENTS THE MINIMAX ALGORITHM WITH ALPHA-BETA PRUNING...
+
+// The below function makes a move on behalf of the AI
+function playAI()
+{
+    // If it's the first turn of AI then set its symbol at any place at random.
+    if (moves == 0) {
+        let random = Math.floor((Math.random() * 9));
+        let tile = document.getElementById(Math.floor(random / 3) + "" + random % 3);
+        triggerClick(tile);
+    } else {
+        // Applying the minimax algorithm to make a move...
+        let maxEval = -Infinity;
+        let optimalMove;
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[0].length; j++) {
+                if (board[i][j] == '') {
+                    board[i][j] = AI;
+                    let score = minimax(board, 0, -Infinity, +Infinity, false);
+                    board[i][j] = '';
+                    if (score > maxEval) {
+                        maxEval = score;
+                        optimalMove = { i, j };
+                    }
+                }
+            }
+        }
+
+        if (optimalMove) {
+            let tile = document.getElementById(optimalMove.i + "" + optimalMove.j);
+            triggerClick(tile);
+        } else {
+            console.error("No optimal move found");
+        }
+    }
+}
+
+function minimax(board, depth, alpha, beta, maximizingPlayer)
+{
+    let result = checkWinner();
+    if (result != null)
+    {
+        let score = scoresIndex[result];
+        return score;
+    }
+    if (maximizingPlayer)
+    {
+        let maxEval = -Infinity;
+        for (let i = 0; i < board.length; i++)
+        {
+            for (let j = 0; j < board[0].length; j++)
+            {
+                if (board [i][j] == '')
+                {
+                    board [i][j] = AI;
+                    let score = minimax(board, depth + 1, alpha, beta, false);
+                    board [i][j] = '';
+                    maxEval = Math.max(score, maxEval);
+                    alpha = Math.max(score, alpha);
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+        return maxEval;
+    }else{
+        let minEval = Infinity;
+        for (let i = 0; i < board.length; i++)
+        {
+            for (let j = 0; j < board[0].length; j++)
+            {
+                if (board [i][j] == '')
+                {
+                    board [i][j] = user;
+                    let score = minimax(board, depth + 1, alpha, beta, true);
+                    board [i][j] = '';
+                    minEval = Math.min(score, minEval);
+                    beta = Math.min(beta, score);
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+        return minEval;
+    }
 }

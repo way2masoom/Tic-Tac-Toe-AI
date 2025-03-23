@@ -21,17 +21,24 @@ main {
     height: 100vh;
     display: flex;
     flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }
 
+h1 {
+    color: #00C9EA;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
 
 header {
-    
     background-color: #001219;
     height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .nav {
     flex: 0 1 auto;
     height: 3rem;
@@ -45,44 +52,49 @@ header {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.nav:hover{
+
+.nav:hover {
     height: 4rem;
     padding-left: 20px;
     padding-right: 20px;
     font-size: larger;
 }
-.nav img{
+
+.nav img {
     height: 2rem;
     width: 2rem;
     border-radius: 50px;
     transition: all 0.3s ease;
 }
-.nav:hover img{
+
+.nav:hover img {
     height: 3rem;
     width: 3rem;
     border-radius: 50px;
 }
+
 .activate {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
+
 .content {
     flex: 1 1 auto;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .card {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     background-color: #192a32;
     height: 500px;
     width: 500px;
@@ -95,13 +107,14 @@ header {
     pointer-events: none;
     transform: scale(0.9);
     transition: all 0.3s ease;
-    
 }
+
 .card.activate {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
 }
+
 .row {
     display: flex;
     justify-content: space-evenly;
@@ -122,9 +135,11 @@ header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.tile.cpu {
-    color: #f2b237;
+
+.tile.AI {
+    color: #FF5722;
 }
+
 .tile.disabled {
     pointer-events: none;
 }
@@ -146,7 +161,7 @@ header {
     overflow-y: hidden;
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%,-50%) scale(0.9);
+    transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: all 0.3s ease;
@@ -155,8 +170,9 @@ header {
 .choose.activate {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
+
 .choose-title {
     height: 60px;
     width: 100%;
@@ -174,8 +190,8 @@ header {
     align-items: center;
     justify-content: space-evenly;
     height: 139px;
-    
 }
+
 .chooser {
     cursor: pointer;
     color: #1f3540;
@@ -196,7 +212,6 @@ header {
     align-items: center;
     justify-content: space-evenly;
     height: 119px;
-    
 }
 
 .reset {
@@ -212,11 +227,39 @@ header {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .won-title {
     font-weight: 600;
     height: 80px;
     font-size: 3em;
 }
+
+.celebration {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.celebration-content {
+    background-color: #192a32;
+    color: #00C9EA;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.celebration-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
 /* Media Queries */
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
@@ -228,11 +271,11 @@ header {
         height: 90px;
         width: 90px;
     }
-    .choose{
+    .choose {
         width: 300px;
         font-size: 0.8em;
     }
-    .chooser{
+    .chooser {
         width: 120px;
     }
 }
