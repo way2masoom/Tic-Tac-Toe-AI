@@ -1,10 +1,13 @@
 # Tic-Tac-Toe AI 🎮
 
-![Tic-Tac-Toe AI](screenshot.png)  
+![Tic-Tac-Toe AI](game-view.png)  
 _A game where you can't beat the AI!_
 
 ## **About the Game**
 This is an **unbeatable Tic-Tac-Toe game** implemented using the **Minimax Algorithm with Alpha-Beta Pruning**. The AI always makes the best possible move, ensuring that you **can never win!** 😈
+
+## **Live View**
+**LINK** https://htmlpreview.github.io/?https://github.com/way2masoom/Tic-Tac-Toe-AI/blob/main/index.html
 
 ## **Features**
 ✅ Unbeatable AI using **Minimax Algorithm** 🤖  
