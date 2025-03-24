@@ -4,51 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe-AI</title>
-    <!-- linking css file  -->
+    <!-- Linking CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
-        <div class="content">
+        <!-- Game header with image -->
+        <header>
+            <!-- <img src="path_to_game_image.jpg" alt="Tic-Tac-Toe Game" class="game-image"> -->
             <h1>Welcome to the Tic-Tac-Toe Game</h1>
+        </header>
+        
+        <div class="content">
+            <!-- Player choice and AI first move selection -->
             <div class="choose activate">
                 <div class="choose-title">What do you want?</div>
                 <div class="choose-btn">
-                <button class="chooser" onclick="choice(this)" style="background-color: #4CAF50;">X</button>
-                <button class="chooser" onclick="choice(this)" style="background-color: #FF5722;">O</button>
+                    <button class="chooser" onclick="choice(this)" style="background-color: #4CAF50;">X</button>
+                    <button class="chooser" onclick="choice(this)" style="background-color: #FF5722;">O</button>
                 </div>
             </div>
+            
             <div class="firstOne choose">
                 <div class="choose-title">Who will play first?</div>
                 <div class="choose-btn">
-                <button class="chooser" onclick="firstOne(this)" style="background-color: #4CAF50;">YOU</button>
-                <button class="chooser" onclick="firstOne(this)" style="background-color: #FF5722;">AI</button>
+                    <button class="chooser" onclick="firstOne(this)" style="background-color: #4CAF50;">YOU</button>
+                    <button class="chooser" onclick="firstOne(this)" style="background-color: #FF5722;">AI</button>
                 </div>
             </div>
+
+            <!-- Game board -->
             <div class="card">
                 <div class="row">
-                    <div class="tile" style="border-top-left-radius: 25px;"></div>
-                    <div class="tile"></div>
-                    <div class="tile" style="border-top-right-radius: 25px;"></div>
+                    <div class="tile" id="00" style="border-top-left-radius: 25px;"></div>
+                    <div class="tile" id="01"></div>
+                    <div class="tile" id="02" style="border-top-right-radius: 25px;"></div>
                 </div>
                 <div class="row">
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
+                    <div class="tile" id="10"></div>
+                    <div class="tile" id="11"></div>
+                    <div class="tile" id="12"></div>
                 </div>
                 <div class="row">
-                    <div class="tile" style="border-bottom-left-radius: 25px;"></div>
-                    <div class="tile"></div>
-                    <div class="tile" style="border-bottom-right-radius: 25px;"></div>
+                    <div class="tile" id="20" style="border-bottom-left-radius: 25px;"></div>
+                    <div class="tile" id="21"></div>
+                    <div class="tile" id="22" style="border-bottom-right-radius: 25px;"></div>
                 </div>
             </div>
+
+            <!-- Win/lose message -->
             <div class="won choose">
                 <div class="won-title choose-title"></div>
                 <div class="win-choose-btn">
-                <button class="reset" onclick="reset()" style="background-color: #FF5722;">RESET</button>
+                    <button class="reset" onclick="reset()" style="background-color: #FF5722;">RESET</button>
                 </div>
             </div>
         </div>
+
+        <!-- Celebration popup -->
         <div id="celebration" class="celebration">
             <div class="celebration-content">
                 <h2 id="winner-name"></h2>
@@ -56,7 +69,8 @@
             </div>
         </div>
     </main>
+
+    <!-- Link to JavaScript -->
     <script src="app.js"></script>
-    <script src="optimizer.js"></script>
 </body>
 </html>
